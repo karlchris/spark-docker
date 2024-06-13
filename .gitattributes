@@ -1,4 +1,2 @@
-*.csv
-*.parquet
 *.parquet !text !filter !merge !diff
 *.csv !text !filter !merge !diff
