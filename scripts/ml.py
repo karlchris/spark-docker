@@ -9,7 +9,7 @@ from pyspark.ml.evaluation import ClusteringEvaluator
 spark = (
     SparkSession.
     builder.
-    appName("demo_app").
+    appName("ml_demo").
     config("spark.cores.max", "4").
     config("spark.sql.shuffle.partitions", "5").
     getOrCreate()
