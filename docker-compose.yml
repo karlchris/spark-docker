@@ -13,6 +13,7 @@ services:
       - ./scripts:/opt/spark/scripts
       - ./data:/opt/spark/data
       - spark-logs:/opt/spark/spark-events
+      - ./warehouse:/opt/spark/warehouse
     env_file:
       - .env.spark
     ports:
@@ -31,6 +32,7 @@ services:
       - ./scripts:/opt/spark/scripts
       - ./data:/opt/spark/data
       - spark-logs:/opt/spark/spark-events
+      - ./warehouse:/opt/spark/warehouse
     ports:
       - '18080:18080'
 
@@ -46,6 +48,7 @@ services:
       - ./scripts:/opt/spark/scripts
       - ./data:/opt/spark/data
       - spark-logs:/opt/spark/spark-events
+      - ./warehouse:/opt/spark/warehouse
 
 volumes:
   spark-logs:
