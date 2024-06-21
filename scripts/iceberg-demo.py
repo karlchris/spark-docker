@@ -40,7 +40,6 @@ iceberg_df = spark.read.format("iceberg").load(f"{table_name}")
 iceberg_df.printSchema()
 iceberg_df.show()
 
-
 # Schema Evolution
 spark.sql(f"ALTER TABLE {table_name} RENAME COLUMN job_title TO job")
 spark.sql(f"ALTER TABLE {table_name} ALTER COLUMN age TYPE bigint")
@@ -51,8 +50,7 @@ iceberg_df.show()
 
 spark.sql(f"SELECT * FROM {table_name}.snapshots").show()
 
-# ACID: update, add, and delete records
-# spark.sql(f"UPDATE {table_name} SET salary = 100")
+# ACID: add and delete records
 spark.sql(f"DELETE FROM {table_name} WHERE age = 42")
 spark.sql(f"INSERT INTO {table_name} values ('person4', 50, 'Teacher', 2000)")
 spark.sql(f"SELECT * FROM {table_name}.snapshots").show()
@@ -60,3 +58,6 @@ spark.sql(f"SELECT * FROM {table_name}.snapshots").show()
 # Alter Partitions
 spark.sql(f"ALTER TABLE {table_name} ADD PARTITION FIELD age")
 spark.read.format("iceberg").load(f"{table_name}").where("age = 28").show()
+
+# Time Travel
+spark.sql(f"SELECT * FROM {table_name}.snapshots").show(1, truncate=False)
