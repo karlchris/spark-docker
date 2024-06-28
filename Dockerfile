@@ -2,15 +2,15 @@ FROM python:3.10-bullseye as spark-base
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-      sudo \
-      curl \
-      vim \
-      unzip \
-      rsync \
-      openjdk-11-jdk \
-      build-essential \
-      software-properties-common \
-      ssh && \
+        sudo \
+        curl \
+        vim \
+        unzip \
+        rsync \
+        openjdk-11-jdk \
+        build-essential \
+        software-properties-common \
+        ssh && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -55,8 +55,13 @@ ENV PYTHONPATH=$SPARK_HOME/python/:$PYTHONPATH
 
 FROM pyspark
 
+RUN curl https://repo1.maven.org/maven2/org/apache/spark/spark-avro_2.12/3.1.2/spark-avro_2.12-3.1.2.jar -Lo /opt/spark/jars/spark-avro_2.12-3.1.2.jar
+
 # Download iceberg spark runtime
 RUN curl https://repo1.maven.org/maven2/org/apache/iceberg/iceberg-spark-runtime-3.4_2.12/1.4.3/iceberg-spark-runtime-3.4_2.12-1.4.3.jar -Lo /opt/spark/jars/iceberg-spark-runtime-3.4_2.12-1.4.3.jar
+# Download hudi spark runtime
+RUN curl https://repo1.maven.org/maven2/org/apache/hudi/hudi-spark3.5-bundle_2.13/0.15.0/hudi-spark3.5-bundle_2.13-0.15.0.jar -Lo /opt/spark/jars/hudi-spark3.5-bundle_2.13-0.15.0.jar
+
 
 # Add iceberg spark runtime jar to IJava classpath
 ENV IJAVA_CLASSPATH=/opt/spark/jars/*
