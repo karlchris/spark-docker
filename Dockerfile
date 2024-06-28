@@ -55,7 +55,7 @@ ENV PYTHONPATH=$SPARK_HOME/python/:$PYTHONPATH
 
 FROM pyspark
 
-RUN curl https://repo1.maven.org/maven2/org/apache/spark/spark-avro_2.12/3.1.2/spark-avro_2.12-3.1.2.jar -Lo /opt/spark/jars/spark-avro_2.12-3.1.2.jar
+RUN curl https://repo1.maven.org/maven2/org/apache/spark/spark-avro_2.13/3.5.1/spark-avro_2.13-3.5.1.jar -Lo /opt/spark/jars/spark-avro_2.13-3.5.1.jar
 
 # Download iceberg spark runtime
 RUN curl https://repo1.maven.org/maven2/org/apache/iceberg/iceberg-spark-runtime-3.4_2.12/1.4.3/iceberg-spark-runtime-3.4_2.12-1.4.3.jar -Lo /opt/spark/jars/iceberg-spark-runtime-3.4_2.12-1.4.3.jar

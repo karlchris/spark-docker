@@ -2,7 +2,7 @@ from pyspark.sql import SparkSession
 from pyspark import SparkConf
 from pyspark.sql.functions import lit, col
 
-hudi_spark_jar = 'org.apache.hudi:hudi-spark3.5-bundle_2.13:0.15.0,org.apache.spark:spark-avro_2.12:3.1.2'
+hudi_spark_jar = 'org.apache.hudi:hudi-spark3.5-bundle_2.13:0.15.0,org.apache.spark:spark-avro_2.13:3.5.1'
 
 conf = SparkConf().setAppName("YourAppName") \
     .set("spark.kyro.registrator", "org.apache.spark.HoodieSparkKryoRegistrar") \
