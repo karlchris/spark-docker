@@ -55,13 +55,12 @@ ENV PYTHONPATH=$SPARK_HOME/python/:$PYTHONPATH
 
 FROM pyspark
 
-RUN curl https://repo1.maven.org/maven2/org/apache/spark/spark-avro_2.13/3.5.1/spark-avro_2.13-3.5.1.jar -Lo /opt/spark/jars/spark-avro_2.13-3.5.1.jar
-
 # Download iceberg spark runtime
 RUN curl https://repo1.maven.org/maven2/org/apache/iceberg/iceberg-spark-runtime-3.4_2.12/1.4.3/iceberg-spark-runtime-3.4_2.12-1.4.3.jar -Lo /opt/spark/jars/iceberg-spark-runtime-3.4_2.12-1.4.3.jar
 # Download hudi spark runtime
 RUN curl https://repo1.maven.org/maven2/org/apache/hudi/hudi-spark3.5-bundle_2.13/0.15.0/hudi-spark3.5-bundle_2.13-0.15.0.jar -Lo /opt/spark/jars/hudi-spark3.5-bundle_2.13-0.15.0.jar
 
+RUN curl https://repo1.maven.org/maven2/org/apache/spark/spark-avro_2.13/3.5.1/spark-avro_2.13-3.5.1.jar -Lo /opt/spark/jars/spark-avro_2.13-3.5.1.jar
 
 # Add iceberg spark runtime jar to IJava classpath
 ENV IJAVA_CLASSPATH=/opt/spark/jars/*

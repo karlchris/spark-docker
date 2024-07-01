@@ -4,7 +4,7 @@ from pyspark.sql.functions import lit, col
 
 hudi_spark_jar = 'org.apache.hudi:hudi-spark3.5-bundle_2.13:0.15.0,org.apache.spark:spark-avro_2.13:3.5.1'
 
-conf = SparkConf().setAppName("YourAppName") \
+conf = SparkConf().setAppName("hudi-demo") \
     .set("spark.kyro.registrator", "org.apache.spark.HoodieSparkKryoRegistrar") \
     .set("spark.serializer", "org.apache.spark.serializer.KryoSerializer") \
     .set("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.hudi.catalog.HoodieCatalog") \
