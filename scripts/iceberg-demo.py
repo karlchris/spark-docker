@@ -8,7 +8,7 @@ iceberg_spark_ext = 'org.apache.iceberg:iceberg-spark-extensions-3.4_2.12:1.4.3'
 catalog_name = "demo"
 
 # Setup iceberg config
-conf = SparkConf().setAppName("YourAppName") \
+conf = SparkConf().setAppName("icebergDemo") \
     .set("spark.sql.extensions", "org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions") \
     .set(f"spark.sql.catalog.{catalog_name}", "org.apache.iceberg.spark.SparkCatalog") \
     .set('spark.jars.packages', iceberg_spark_jar) \
