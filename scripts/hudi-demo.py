@@ -1,12 +1,11 @@
 from pyspark.sql import SparkSession
 from pyspark import SparkConf
-from pyspark.sql.types import StructType, StructField, StringType, IntegerType
-from pyspark.sql.functions import expr, lit, col
+from pyspark.sql.functions import col
 
 jars = 'org.apache.hudi:hudi-spark3-bundle_2.12:0.15.0'
 
 # Setup config
-conf = SparkConf().setAppName("deltaDemo") \
+conf = SparkConf().setAppName("hudiDemo") \
     .set("spark.sql.extensions", "org.apache.spark.sql.hudi.HoodieSparkSessionExtension") \
     .set("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.hudi.catalog.HoodieCatalog") \
     .set("spark.serializer", "org.apache.spark.serializer.KryoSerializer") \
