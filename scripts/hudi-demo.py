@@ -36,7 +36,8 @@ inserts = spark.createDataFrame(data).toDF(*columns)
 
 hudi_options = {
     'hoodie.table.name': tableName,
-    'hoodie.datasource.write.partitionpath.field': 'city'
+    'hoodie.datasource.write.partitionpath.field': 'city',
+    'hoodie.datasource.write.recordkey.field': 'uuid'
 }
 
 inserts.write.format("hudi"). \
@@ -61,19 +62,6 @@ updatesDf.write.format("hudi"). \
     options(**hudi_options). \
     mode("append"). \
     save(basePath)
-
-# Merging data
-# print("Merging data")
-# adjustedFareDF = spark.read.format("hudi").load(basePath). \
-#     limit(2).withColumn("fare", col("fare") * 100)
-
-# adjustedFareDF.write.format("hudi"). \
-#     option("hoodie.datasource.write.payload.class","com.payloads.CustomMergeIntoConnector"). \
-#     mode("append"). \
-#     save(basePath)
-
-# # Notice Fare column has been updated but all other columns remain intact.
-# spark.read.format("hudi").load(basePath).show()
 
 # Delete data
 # Lets  delete rider: rider-D
@@ -127,7 +115,9 @@ inserts = spark.createDataFrame(data).toDF(*columns)
 hudi_options = {
     'hoodie.table.name': tableName,
     'hoodie.datasource.write.partitionpath.field': 'city',
-    'hoodie.table.cdc.enabled': 'true'
+    'hoodie.table.cdc.enabled': 'true',
+    'hoodie.datasource.write.precombine.field': 'ts',
+    'hoodie.datasource.write.recordkey.field': 'uuid'
 }
 # Insert data
 inserts.write.format("hudi"). \
@@ -147,7 +137,8 @@ updatesDf.write.format("hudi"). \
 cdc_read_options = {
     'hoodie.datasource.query.incremental.format': 'cdc',
     'hoodie.datasource.query.type': 'incremental',
-    'hoodie.datasource.read.begin.instanttime': 0
+    'hoodie.datasource.read.begin.instanttime': 0,
+    'hoodie.datasource.write.table.type': 'MERGE_ON_READ'
 }
 spark.read.format("hudi"). \
     options(**cdc_read_options). \
