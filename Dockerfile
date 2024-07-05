@@ -63,6 +63,9 @@ RUN curl https://repo1.maven.org/maven2/io/delta/delta-core_2.12/2.4.0/delta-cor
 RUN curl https://repo1.maven.org/maven2/io/delta/delta-spark_2.12/3.2.0/delta-spark_2.12-3.2.0.jar -Lo /opt/spark/jars/delta-spark_2.12-3.2.0.jar
 RUN curl https://repo1.maven.org/maven2/io/delta/delta-storage/3.2.0/delta-storage-3.2.0.jar -Lo /opt/spark/jars/delta-storage-3.2.0.jar
 
+# Download hudi jars
+RUN curl https://repo1.maven.org/maven2/org/apache/hudi/hudi-spark3-bundle_2.12/0.15.0/hudi-spark3-bundle_2.12-0.15.0.jar -Lo /opt/spark/jars/hudi-spark3-bundle_2.12-0.15.0.jar
+
 # Add iceberg spark runtime jar to IJava classpath
 ENV IJAVA_CLASSPATH=/opt/spark/jars/*
 
