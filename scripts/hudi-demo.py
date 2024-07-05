@@ -64,7 +64,7 @@ updatesDf.write.format("hudi"). \
     save(basePath)
 
 # Delete data
-# Lets  delete rider: rider-D
+# Lets  delete rider: rider-F
 print("Deleting data")
 deletesDF = spark.read.format("hudi").load(basePath).filter("rider == 'rider-F'")
 
@@ -117,7 +117,8 @@ hudi_options = {
     'hoodie.datasource.write.partitionpath.field': 'city',
     'hoodie.table.cdc.enabled': 'true',
     'hoodie.datasource.write.precombine.field': 'ts',
-    'hoodie.datasource.write.recordkey.field': 'uuid'
+    'hoodie.datasource.write.recordkey.field': 'uuid',
+    'hoodie.datasource.write.table.type': 'MERGE_ON_READ'
 }
 # Insert data
 inserts.write.format("hudi"). \
@@ -137,8 +138,7 @@ updatesDf.write.format("hudi"). \
 cdc_read_options = {
     'hoodie.datasource.query.incremental.format': 'cdc',
     'hoodie.datasource.query.type': 'incremental',
-    'hoodie.datasource.read.begin.instanttime': 0,
-    'hoodie.datasource.write.table.type': 'MERGE_ON_READ'
+    'hoodie.datasource.read.begin.instanttime': 0
 }
 spark.read.format("hudi"). \
     options(**cdc_read_options). \
