@@ -23,7 +23,7 @@ ENV HADOOP_HOME=${HADOOP_HOME:-"/opt/hadoop"}
 RUN mkdir -p ${HADOOP_HOME} && mkdir -p ${SPARK_HOME}
 WORKDIR ${SPARK_HOME}
 
-ENV SPARK_VERSION=3.5.1
+ENV SPARK_VERSION=3.5.3
 
 # Download spark
 RUN mkdir -p ${SPARK_HOME} \
