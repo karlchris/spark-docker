@@ -1,4 +1,6 @@
 **/__pycache__
 **/.DS_Store
 **/data/output
-**/warehouse
+**/warehouse/*
+!**/warehouse/jupyter_installation_test.ipynb
+**/spark-logs
