@@ -1,4 +1,5 @@
 FROM python:3.12.9-bullseye AS spark-base
+# Arrow is broken in 3.13?
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
@@ -39,7 +40,7 @@ WORKDIR ${SPARK_HOME}
 # see resources: https://dlcdn.apache.org/spark/spark-3.5.5/
 # filename: spark-3.5.5-bin-hadoop3.tgz 
 RUN mkdir -p ${SPARK_HOME} \
-    && curl https://dlcdn.apache.org/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop3.tgz -o spark-${SPARK_VERSION}-bin-hadoop3.tgz \
+    && curl  https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop3.tgz  -o spark-${SPARK_VERSION}-bin-hadoop3.tgz \
     && tar xvzf spark-${SPARK_VERSION}-bin-hadoop3.tgz --directory ${SPARK_HOME} --strip-components 1 \
     && rm -rf spark-${SPARK_VERSION}-bin-hadoop3.tgz
 
